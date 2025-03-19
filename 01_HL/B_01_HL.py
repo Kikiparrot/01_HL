@@ -61,24 +61,25 @@ def int_check(question, low=None, high=None, exit_code=None):
         if response == exit_code:
             return response
 
-    try:
-        response = int(response)
+        try:
+            response = int(response)
 
-        # integer is not too low
-        if low is not None and response < low:
-            print(error)
-        # response is more than low number
-        elif high is not None and response > high:
-            print(error)
-        # valid response
-        else:
+            # integer is not too low
+            if low is not None and response < low:
+                print(error)
+            # response is more than low number
+            elif high is not None and response > high:
+                print(error)
+            # valid response
+            else:
+                return response
+
+            # if response valid, return it
             return response
 
-        # if response valid, return it
-        return response
+        except ValueError:
+            print(error)
 
-    except ValueError:
-        print(error)
 
 # Main routine
 
