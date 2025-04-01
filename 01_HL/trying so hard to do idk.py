@@ -119,16 +119,20 @@ if want_instructions == "yes":
 # initialise game variables
 mode = "regular"
 rounds_played = 0
+rounds_won = 0
+rounds_lost = 0
 end_game = "no"
 feedback = ""
 
 game_history = []
 all_scores = []
+
 # instructions
 
 # ask user for number of rounds / infinite mode
 num_rounds = int_check("How many rounds would you like to play? push <enter> for infinite mode: ",
                        low=1, exit_code="")
+
 
 if num_rounds == "":
     mode = "infinite"
@@ -167,6 +171,7 @@ while rounds_played < num_rounds:
     guesses_used = 0
     already_guessed = []
     secret_num = random.randint(low_num, high_num)
+    print(secret_num)
 
     guess = ""
     while guess != secret_num and guesses_used < guesses_allowed:
@@ -217,5 +222,60 @@ while rounds_played < num_rounds:
 
     # print feedback
         print(feedback)
+# game history / stats
 
-    # game history / stats
+    rounds_won = rounds_played - rounds_lost
+    rounds_lost = rounds_played - rounds_won
+
+    while True:
+        rounds_played = rounds_won + rounds_lost
+        if rounds_played == num_rounds:
+            break
+
+        if feedback == "lose":
+            rounds_lost += 1
+
+        elif feedback == "won":
+            rounds_won += 1
+
+
+        else:
+            continue
+
+    if rounds_played == num_rounds:
+
+        for item in game_history:
+            print(item)
+            round_feedback = f"{rounds_played}, {rounds_won} and {rounds_lost}"
+            history_item = f"round: {rounds_won} - {rounds_lost}"
+
+            print(round_feedback)
+            print("rounds played debugging", rounds_played)
+
+        print()
+        print(" ❌❌❌ GAME OVER ❌❌❌ ")
+        # calculate stats
+
+        see_history = string_checker(" \ndo you want to see your game history?")
+        if see_history == "yes":
+            for item in game_history:
+                print(item)
+
+        game_results = f"{rounds_played}: Rounds won: {rounds_won}| " \
+                       f"rounds lost {rounds_lost},"
+
+        print(game_results)
+        game_history.append(game_results)
+
+        # output game stats
+        print("+++ game statistics +++")
+        print(f"{rounds_won}, {rounds_lost}")
+
+        print()
+        print("thanks for playing ")
+
+    elif user_choice == "xxx":
+        print()
+        print(" ❌❌❌ GAME OVER ❌❌❌ ")
+        print("u quit")
+
