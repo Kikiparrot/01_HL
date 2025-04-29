@@ -22,6 +22,7 @@ def string_checker(question, valid_ans=("yes", "no")):
         print(error)
         print()
 
+
 def yes_no(question):
     """Checks user response to a question is yes/no (y/n), returns 'yes' or 'no'"""
     while True:
@@ -34,6 +35,7 @@ def yes_no(question):
             return "no"
         else:
             print("please answer yes / no")
+
 
 def instruction():
     """prints instructions"""
@@ -163,7 +165,6 @@ while rounds_played < num_rounds:
 
     user_choice = f"choose: a number between {low_num} and {high_num}"
 
-
     guesses_used = 0
     already_guessed = []
     secret_num = random.randint(low_num, high_num)
@@ -178,8 +179,8 @@ while rounds_played < num_rounds:
 
         # check no dupe
         elif guess in already_guessed:
-            print(f"you hve already guessed {guess}. youve still used "
-                        f"{guesses_used} / {guesses_allowed}")
+            print(f"you hve already guessed {guess}. you've still used "
+                  f"{guesses_used} / {guesses_allowed}")
             continue
 
         # if guess not dupe
@@ -198,7 +199,7 @@ while rounds_played < num_rounds:
                         f"you have used {guesses_used} out of {guesses_allowed} guesses")
 
         if guess is secret_num:
-            feedback = (f"you have got the secret number in {guesses_used} out of {guesses_allowed} guesses! \n")
+            feedback = f"you have got the secret number in {guesses_used} out of {guesses_allowed} guesses! \n"
 
 
         elif guesses_used == guesses_allowed and guess is not secret_num:
@@ -214,8 +215,7 @@ while rounds_played < num_rounds:
         if guesses_used == 4 and guess is not secret_num:
             feedback = "careful!!! time is running out!"
 
-
-    # print feedback
+        # print feedback
         print(feedback)
 
     # game history / stats
